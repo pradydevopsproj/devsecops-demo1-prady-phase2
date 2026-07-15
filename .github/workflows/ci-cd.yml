@@ -171,7 +171,7 @@ jobs:
           
           # Update the deployment file directly
           # sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" kubernetes/deployment.yaml // This workes for Deployment through direct kubernetes manifest files-pradyumna
-          sed -i "s|image.tag: .*|image.tag: ${IMAGE_TAG}|g" helm-charts/tictac-app/values.yaml 
+          sed -i "s|tag: .*|tag: ${IMAGE_TAG}|g" helm-charts/tictac-app/values.yaml 
           
           # Verify the change
           echo "Updated deployment to use image: ${NEW_IMAGE}"
