@@ -11,7 +11,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "sha-1ab73867bdc02be54f17e9f55fe2c02c88019741" # I changed as per deployment file - pradyumna
+  tag: sha-ce282f1d2ea4ba6a659cb33a59460a027cd3d73b
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: 
