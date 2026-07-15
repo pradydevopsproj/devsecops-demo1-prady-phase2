@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'kubernetes/deployment.yaml'  # Ignore changes to this file to prevent loops
+      - 'helm-charts/tictac-app/values.yaml' # Ignore changes to this file to prevent loops
   pull_request:
     branches: [ main ]
 
@@ -169,14 +170,17 @@ jobs:
           NEW_IMAGE="${REGISTRY}/${GITHUB_REPOSITORY}:${IMAGE_TAG}"
           
           # Update the deployment file directly
-          sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" kubernetes/deployment.yaml
+          # sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" kubernetes/deployment.yaml // This workes for Deployment through direct kubernetes manifest files-pradyumna
+          sed -i "s|image.tag: .*|image.tag: ${IMAGE_TAG}|g" helm-charts/tictac-app/values.yaml 
           
           # Verify the change
           echo "Updated deployment to use image: ${NEW_IMAGE}"
-          grep -A 1 "image:" kubernetes/deployment.yaml
+          # grep -A 1 "image:" kubernetes/deployment.yaml // This workes for Deployment through direct kubernetes manifest files-pradyumna
+          grep -A 1 "image:" helm-charts/tictac-app/values.yaml
       
       - name: Commit and push changes
         run: |
-          git add kubernetes/deployment.yaml
+        # git add kubernetes/deployment.yaml
+          git add helm-charts/tictac-app/values.yaml
           git commit -m "Update Kubernetes deployment with new image tag: ${{ needs.docker.outputs.image_tag }} [skip ci]" || echo "No changes to commit"
           git push
