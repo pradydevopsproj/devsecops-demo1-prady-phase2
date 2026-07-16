@@ -136,7 +136,7 @@ jobs:
         with:
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
           format: 'table'
-          exit-code: '0' # For development or learning, exit-code changed to 0. For prod it should be 1
+          exit-code: '1' # For development or learning, exit-code changed to 0 to avoid trivy alert for any vulnarbilty and pipeline fail. For prod it should be 1
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
