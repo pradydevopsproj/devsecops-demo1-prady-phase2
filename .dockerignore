@@ -13,3 +13,6 @@ README.md
 .env.test.local
 .env.production.local
 kubernetes
+dist
+coverage
+Dockerfile
